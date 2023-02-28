@@ -10,3 +10,5 @@ class Article(models.Model):
         User, on_delete=models.CASCADE, related_name='articles')
     # adding related_name is neccessary for reverse relationship to work in serializer (PrimaryKeyRelatedField)
     
+    def __str__(self):
+        return f'{self.title} | {self.owner}'
