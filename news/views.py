@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 
 @api_view(['GET', 'POST'])
-def article_list(request):
+def article_list(request, format=None):
     if request.method == 'GET':
         articles = Article.objects.all()
         serializer = ArticleSerializer(articles, many=True)
@@ -27,7 +27,7 @@ def article_list(request):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def article_detail(request, articleId):
+def article_detail(request, articleId, format=None):
     # try:
     #     article = Article.objects.get(pk=articleId)
     # except Article.DoesNotExist:
