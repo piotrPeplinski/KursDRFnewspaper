@@ -3,8 +3,8 @@ from . import views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
-    path('articles/', views.article_list),
-    path('articles/<int:articleId>/', views.article_detail),
+    path('articles/', views.ArticleList.as_view()),
+    path('articles/<int:pk>/', views.ArticleDetail.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
