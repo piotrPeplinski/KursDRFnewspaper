@@ -1,8 +1,21 @@
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from .models import Article
 from .serializers import ArticleSerializer, UserSerializer
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from .permissions import IsOwnerOrReadOnly
+
+
+class APIRoot(APIView):
+    def get(self, request, format=None):
+        links = {
+            'users': reverse('users', request=request, format=format),
+            'articles': reverse('articles', request=request, format=format),
+            # add more links to other endpoints as needed
+        }
+        return Response(links)
 
 
 class ArticleList(generics.ListCreateAPIView):
