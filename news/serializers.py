@@ -14,8 +14,8 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    articles = serializers.PrimaryKeyRelatedField(
-        many=True, queryset=Article.objects.all())
+    articles = serializers.HyperlinkedRelatedField(
+        many=True, queryset=Article.objects.all(), view_name='articleDetail')
     email = serializers.EmailField(
         required=False,
         validators=[
