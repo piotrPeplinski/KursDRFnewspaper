@@ -6,6 +6,8 @@ from .serializers import ArticleSerializer, UserSerializer
 from django.contrib.auth.models import User
 from rest_framework import generics, permissions
 from .permissions import IsOwnerOrReadOnly
+from .paginators import ArticlePaginator
+from rest_framework import filters
 
 
 class APIRoot(APIView):
@@ -21,6 +23,9 @@ class APIRoot(APIView):
 class ArticleList(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    pagination_class = ArticlePaginator
+    filter_backends = [filters.OrderingFilter]
+    ordering = ['-date']
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
