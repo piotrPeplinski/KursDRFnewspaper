@@ -20,10 +20,9 @@ class ArticleListTestCase(APITestCase):
             Article.objects.create(
                 title='Test Article 3', text='This is a test article', owner=self.user)
         ]
-        pagination.PageNumberPagination
         self.expected_data = ArticleSerializer(self.articles, many=True)
 
     def test_list_articles(self):
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertDictEqual(response.data, self.expected_data.data)
+        self.assertEqual(response.data, self.expected_data.data)

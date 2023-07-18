@@ -23,9 +23,9 @@ class APIRoot(APIView):
 class ArticleList(generics.ListCreateAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    pagination_class = ArticlePaginator
-    filter_backends = [filters.OrderingFilter]
-    ordering = ['-date']
+    #pagination_class = ArticlePaginator
+    # filter_backends = [filters.OrderingFilter]
+    # ordering = ['-date']
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
