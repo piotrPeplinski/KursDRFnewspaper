@@ -20,5 +20,5 @@ from rest_framework.authtoken import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
-    path('get-token/', views.obtain_auth_token),#post with username and pswrd
+    path('get-token/', views.obtain_auth_token, name='getToken'),#post with username and pswrd
 ]
