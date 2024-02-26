@@ -44,3 +44,7 @@ class ListCreateUser(generics.ListCreateAPIView):
     def get_permissions(self):
         reqMethod = self.request.method
         return [permissions.IsAdminUser()] if reqMethod == 'GET' else [permissions.AllowAny()]
+
+class UpdateUser(generics.UpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

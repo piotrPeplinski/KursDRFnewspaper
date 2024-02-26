@@ -49,3 +49,20 @@ class UserSerializer(serializers.ModelSerializer):
                 user = User.objects.create_user(
                     username=username, password=password)
             return user
+        
+    def update(self, instance, validated_data):
+        username = validated_data.get('username')
+        email = validated_data.get('email')
+        password = validated_data.get('password')
+
+        try:
+            validate_password(password)
+        except ValidationError as e:
+            raise exceptions.ValidationError({'password': e.messages})
+        else:
+            instance.username = username
+            instance.set_password(password)
+            if email:
+                instance.email=email
+            instance.save()
+            return instance
